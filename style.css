@@ -1,0 +1,220 @@
+@font-face {
+  font-family: "HankenGrotesk";
+  src: url(assets/fonts/HankenGrotesk-VariableFont_wght.ttf);
+}
+
+/* makes sizing simpler */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* remove default spacing */
+/* force styling of type through styling, rather than elements */
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+
+  --mobile-size: 375px;
+  --desktop-size: 1440px;
+  /*Accent*/
+  --clr-red: 0, 100%, 67%;
+  --clr-yellow: 39, 100%, 56%;
+  --clr-teal: 166, 100%, 37%;
+  --clr-blue: 234, 85%, 45%;
+
+  /*Gradients*/
+  --clr-primary-hsl-400: 252, 100%, 67%;
+  --clr-primary-hsl-500: 256, 72%, 46%;
+  --clr-secondary-hsl-400: 241, 81%, 54%;
+  --clr-secondary-hsl-500: 241, 72%, 46%;
+
+  /*Neutral*/
+  --clr-neutral-hsl-100: 0, 0%, 100%;
+  --clr-neutral-hsl-200: 221, 100%, 96%;
+  --clr-neutral-hsl-300: 241, 100%, 89%;
+  --clr-neutral-hsl-400: 224, 30%, 27%;
+
+  --clr-primary-400: hsl(var(--clr-primary-hsl-400));
+  --clr-primary-500: hsl(var(--clr-primary-hsl-500));
+  --clr-secondary-400: hsl(var(--clr-secondary-hsl-400));
+  --clr-secondary-500: hsl(var(--clr-secondary-hsl-500));
+
+  --clr-neutral-100: hsl(var(--clr-neutral-hsl-100));
+  --clr-neutral-200: hsl(var(--clr-neutral-hsl-200));
+  --clr-neutral-300: hsl(var(--clr-neutral-hsl-300));
+  --clr-neutral-400: hsl(var(--clr-neutral-hsl-400));
+
+  --gradient-primary: linear-gradient(
+    var(--clr-primary-400),
+    var(--clr-secondary-400)
+  );
+
+  --gradient-to-transparent: linear-gradient(
+    var(--clr-primary-500),
+    hsl(var(--clr-secondary-hsl-500), 0)
+  );
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --fw-dark: 800;
+
+  --fs-400: 1.125rem;
+  --fs-500: 1.25rem;
+  --fs-600: 1.5rem;
+  --fs-700: 1.75rem;
+  --fs-800: 2rem;
+  --fs-900: 5rem;
+
+  --font-default: "HankenGrotesk", sans-serif;
+}
+
+/* dark mode user-agent-styles */
+
+html {
+  color-scheme: dark light;
+}
+
+/* min body height */
+
+body {
+  font-family: var(--font-default);
+  font-size: var(--fs-400);
+  color: var(--clr-neutral-700);
+}
+
+/* responsive images/videos */
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+.grid-flow {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.result-summary {
+  --padding: 2.5rem;
+  --border-radius: 2rem;
+  max-width: 46rem;
+  display: grid;
+}
+
+@media (min-width: 600px) {
+  body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+  }
+
+  .result-summary {
+    grid-template-columns: 1fr 1fr;
+    border-radius: var(--border-radius);
+    box-shadow: 0.5rem 1rem 3rem;
+  }
+}
+
+.result {
+  color: hsl(var(--clr-neutral-hsl-100), 0.7);
+  text-align: center;
+  padding: var(--padding) calc(var(--padding) * 1.2);
+  background: var(--gradient-primary);
+  border-radius: var(--border-radius);
+}
+
+.title {
+  font-size: var(--fs-800);
+  font-weight: var(--fw-bold);
+}
+
+.result-score {
+  display: grid;
+  margin-inline: auto;
+  place-content: center;
+  width: 12rem;
+  background: var(--gradient-to-transparent);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.grid-flow[data-spacing="large"] {
+  gap: 2rem;
+}
+
+.result-score span {
+  font-size: var(--fs-900);
+  color: white;
+  display: block;
+}
+
+.result-rank {
+  font-size: var(--fs-800);
+  color: white;
+}
+
+/*Summary*/
+
+.flex-group {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.summary {
+  padding: var(--padding) calc(var(--padding) * 1.2);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: calc(var(--padding) * 0.4) calc(var(--padding) * 0.4);
+  color: hsl(var(--item-color));
+  background: hsl(var(--item-color), 0.1);
+  border-radius: calc(var(--border-radius) * 0.4);
+  font-weight: var(--fw-bold);
+}
+
+.summary-item[data-accent="reaction"] {
+  --item-color: var(--clr-red);
+}
+.summary-item[data-accent="memory"] {
+  --item-color: var(--clr-yellow);
+}
+.summary-item[data-accent="verbal"] {
+  --item-color: var(--clr-teal);
+}
+.summary-item[data-accent="visual"] {
+  --item-color: var(--clr-blue);
+}
+
+.summary-score {
+  color: hsl(var(--clr-neutral-hsl-400), 0.4);
+}
+.summary-score span {
+  color: var(--clr-neutral-400);
+}
+
+.summary button {
+  border-radius: 2rem;
+  border: none;
+  padding: calc(var(--padding) * 0.36);
+  background: hsl(var(--clr-neutral-hsl-400));
+  color: white;
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+}
+
+.summary button:is(:hover) {
+  background: var(--gradient-primary);
+  transition: 1.2 ease;
+}
